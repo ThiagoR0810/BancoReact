@@ -36,6 +36,16 @@ class App extends Component {
             onChangeText={this.getName}
           />
         </View>
+
+        <View style={styles.ageView}>
+          <Text style={styles.ageText}>Age: </Text>
+          <TextInput
+            style={styles.ageInput}
+            placeholder="Type your age"
+            underlineColorAndroid="transparent"
+            onChangeText={this.getName}
+          />
+        </View>
         
         
       </View>
@@ -67,6 +77,25 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   nameInput:{
+    flex: 1,
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#222',
+    margin: 10,
+    fontSize: 15,
+    padding: 10
+  },
+  ageView:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginLeft: 10
+  },
+  ageText:{
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  ageInput:{
     flex: 1,
     height: 40,
     borderWidth: 1,
