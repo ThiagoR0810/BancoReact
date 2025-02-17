@@ -2,11 +2,19 @@ import { StatusBar } from 'expo-status-bar';
 import { Component } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
+import {Picker} from '@react-native-picker/picker';
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
+      age: '',
+      sex: 0,
+      sexes: [
+        {key: 1, gender: 'Male'},
+        {key: 2, gender: 'Female'},
+        {key: 3, gender: 'Other'}
+      ]
     };
 
     this.getName = this.getName.bind(this);
@@ -20,7 +28,20 @@ class App extends Component {
     }
   }
 
+  getAge(ageText) {
+    if (ageText.length > 0) {
+      this.setState({age: ageText});
+    } else {
+      this.setState({age: ''});
+    }
+  }
+
   render() { 
+
+    let sexesItem = this.state.sexes.map((v, k) => {
+      return <Picker.Item key={k} value={k} label={v.gender}/>
+    })
+
     return (
       <View style={styles.container}>
         <View style={styles.titleView}>
@@ -28,9 +49,9 @@ class App extends Component {
         </View>
 
         <View style={styles.nameView}>
-          <Text style={styles.nameText}>Name: </Text>
+          <Text style={styles.text}>Name: </Text>
           <TextInput
-            style={styles.nameInput}
+            style={styles.input}
             placeholder="Type your name"
             underlineColorAndroid="transparent"
             onChangeText={this.getName}
@@ -38,14 +59,29 @@ class App extends Component {
         </View>
 
         <View style={styles.ageView}>
-          <Text style={styles.ageText}>Age: </Text>
+          <Text style={styles.text}>Age: </Text>
           <TextInput
-            style={styles.ageInput}
+            style={styles.input}
             placeholder="Type your age"
             underlineColorAndroid="transparent"
-            onChangeText={this.getName}
+            onChangeText={this.getAge}
           />
         </View>
+
+        <View style={styles.pickerContainer}>
+          
+          <Text style={styles.text}>Gender: </Text>
+          <Picker
+          selectedValue={this.state.sex}
+          onValueChange={(itemValue) => this.setState({ sex: itemValue })}
+          style={styles.picker}
+          >
+            {sexesItem}
+          </Picker>
+
+
+        </View>
+
         
         
       </View>
@@ -72,11 +108,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 10
   },
-  nameText:{
+  text:{
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'flex-start', 
   },
-  nameInput:{
+  input:{
     flex: 1,
     height: 40,
     borderWidth: 1,
@@ -91,19 +127,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 10
   },
-  ageText:{
-    fontSize: 20,
-    textAlign: 'center'
+  pickerContainer: {
+    flexDirection: 'row', // Coloca os itens na mesma linha
+    alignItems: 'center', // Alinha verticalmente ao centro
+    marginLeft: 10,
   },
-  ageInput:{
-    flex: 1,
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#222',
-    margin: 10,
-    fontSize: 15,
-    padding: 10
-  }
+  picker: {
+    flex: 1, // Faz o Picker ocupar o espaço restante
+    height: 60,
+    marginLeft: 10
+  },
+
 });
 
 export default App;
