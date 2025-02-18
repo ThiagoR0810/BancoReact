@@ -125,10 +125,13 @@ const styles = StyleSheet.create({
   title:{
     fontSize: 30,
     fontWeight: 'bold',
-    marginTop: 40
+    marginTop: 30,
+    marginBottom: 20
   },
   titleView:{
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'orange',
   },
   nameView:{
     marginTop: 50,
@@ -140,6 +143,7 @@ const styles = StyleSheet.create({
   text:{
     fontSize: 20,
     textAlign: 'flex-start', 
+    fontWeight: 'bold'
   },
   input:{
     flex: 1,
