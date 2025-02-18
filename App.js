@@ -11,13 +11,13 @@ class App extends Component {
     this.state = {
       name: '',
       age: '',
-      sex: 0,
-      sexes: [
+      gender: 0,
+      genders: [
         { key: 1, gender: 'Male' },
         { key: 2, gender: 'Female' },
         { key: 3, gender: 'Other' }
       ],
-      value: 5000,
+      value: 0,
       switchStatus: false
     };
 
@@ -34,19 +34,19 @@ class App extends Component {
   }
 
   showAlert = () => {
-    const { name, age, sexes, sex, value, switchStatus } = this.state;
-    const gender = sexes[sex]?.gender || "Not specified";
+    const { name, age, genders, gender, value, switchStatus } = this.state;
+    const sexGender = genders[gender]?.gender || "Not specified";
     const studentStatus = switchStatus ? "Yes" : "No";
 
     Alert.alert(
       "Account Details",
-      `Name: ${name}\nAge: ${age}\nGender: ${gender}\nLimit: R$ ${value.toFixed(2)}\nStudent: ${studentStatus}`,
+      `Name: ${name}\nAge: ${age}\nGender: ${sexGender}\nLimit: R$ ${value.toFixed(2)}\nStudent: ${studentStatus}`,
       [{ text: "OK" }]
     );
   };
 
   render() {
-    let sexesItem = this.state.sexes.map((v, k) => {
+    let gendersItem = this.state.genders.map((v, k) => {
       return <Picker.Item key={k} value={k} label={v.gender} />;
     });
 
@@ -79,11 +79,11 @@ class App extends Component {
         <View style={styles.pickerContainer}>
           <Text style={styles.text}>Gender: </Text>
           <Picker
-            selectedValue={this.state.sex}
-            onValueChange={(itemValue) => this.setState({ sex: itemValue })}
+            selectedValue={this.state.gender}
+            onValueChange={(itemValue) => this.setState({ gender: itemValue })}
             style={styles.picker}
           >
-            {sexesItem}
+            {gendersItem}
           </Picker>
         </View>
 
