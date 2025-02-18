@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Component } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Switch, TouchableOpacity } from 'react-native';
 
 import {Picker} from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
@@ -17,7 +17,8 @@ class App extends Component {
         {key: 2, gender: 'Female'},
         {key: 3, gender: 'Other'}
       ],
-      value: 5000
+      value: 5000,
+      switchStatus: false
     };
 
     this.getName = this.getName.bind(this);
@@ -96,6 +97,19 @@ class App extends Component {
           <Text style={styles.text}>R$ {this.state.value.toFixed(2)}</Text>
         </View>
 
+        <View style={styles.switchContainer}>
+          <Text style={styles.text}>Are you a Student?</Text>
+          <Switch
+          value={this.state.switchStatus}
+          onValueChange={(switchValue) => this.setState({switchStatus: switchValue})}
+          />
+        </View>
+
+        <View style={styles.btnView}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.btnText}>Open Account</Text>
+          </TouchableOpacity>
+        </View>
         
         
       </View>
@@ -111,12 +125,13 @@ const styles = StyleSheet.create({
   title:{
     fontSize: 30,
     fontWeight: 'bold',
-    marginTop: 20
+    marginTop: 40
   },
   titleView:{
     alignItems: 'center'
   },
   nameView:{
+    marginTop: 50,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -131,6 +146,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: '#222',
+    borderRadius: 5,
     margin: 10,
     fontSize: 15,
     padding: 10
@@ -160,6 +176,34 @@ const styles = StyleSheet.create({
   slider:{
     flex: 1,
     height: 40
+  },
+  switchContainer:{
+    flexDirection: 'row', // Coloca os itens na mesma linha
+    alignItems: 'center', // Alinha verticalmente ao centro
+    justifyContent: 'space-between',
+    marginLeft: 10,
+    marginRight: 10
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    borderRadius: 5,
+    borderColor: 'black',
+    borderWidth: 2,
+    backgroundColor: 'white',
+    width: 100,
+    height: 40
+  }, 
+  btnView:{
+    alignItems: 'center', // Alinha verticalmente ao centro
+    marginLeft: 10,
+    marginRight: 10
+  },
+  btnText:{
+    color: 'black',
+    fontSize: 13,
+    fontWeight: 'bold'
   }
 
 
