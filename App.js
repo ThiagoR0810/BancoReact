@@ -3,6 +3,8 @@ import { Component } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import {Picker} from '@react-native-picker/picker';
+import Slider from '@react-native-community/slider';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,8 @@ class App extends Component {
         {key: 1, gender: 'Male'},
         {key: 2, gender: 'Female'},
         {key: 3, gender: 'Other'}
-      ]
+      ],
+      value: 5000
     };
 
     this.getName = this.getName.bind(this);
@@ -69,7 +72,6 @@ class App extends Component {
         </View>
 
         <View style={styles.pickerContainer}>
-          
           <Text style={styles.text}>Gender: </Text>
           <Picker
           selectedValue={this.state.sex}
@@ -78,8 +80,20 @@ class App extends Component {
           >
             {sexesItem}
           </Picker>
+        </View>
 
-
+        <View style={styles.sliderContainer}>
+          <Text style={styles.text}>Limit:</Text>
+          <Slider
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={10000}
+            minimumTrackTintColor="red"
+            maximumTrackTintColor="red"
+            onValueChange={(selectedValue) => this.setState({value: selectedValue})}
+            value={this.state.value}
+          />
+          <Text style={styles.text}>R$ {this.state.value.toFixed(2)}</Text>
         </View>
 
         
@@ -137,6 +151,17 @@ const styles = StyleSheet.create({
     height: 60,
     marginLeft: 10
   },
+  sliderContainer:{
+    flexDirection: 'row', // Coloca os itens na mesma linha
+    alignItems: 'center', // Alinha verticalmente ao centro
+    marginLeft: 10,
+    marginRight: 10
+  },
+  slider:{
+    flex: 1,
+    height: 40
+  }
+
 
 });
 
